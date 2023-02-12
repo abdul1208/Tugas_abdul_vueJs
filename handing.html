@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Handling</title>
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click="counter += 100">Add 1</button>
+        <p>The button above has been Clicked {{ counter }} times.</p>
+    </div>
+
+    <div id="example">
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <div id="example-2">
+        <button v-on:click="say('hi')">Say Hi</button>
+        <button v-on:click="say('what')">Say What</button>
+    </div>
+
+    <div>
+    <!-- only call vm.submit() when the keyCode is 13 -->
+    <input v-on:keyup.13="submit">
+    <!-- same as above -->
+    <input v-on:keyup.enter="submit">
+    <!-- also works for shorthand -->
+    <input @keyup.enter="submit">
+    </div>
+    
+    <span>Multiline message is:</span>
+    <p>{{ message }}</p>
+    <br>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+
+
+    
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+    var example1 = new Vue ({
+        el: '#example-1',
+        data: {
+            counter: 0
+        }
+    })
+
+    var vm = new Vue({
+  el: '#example',
+  data: {
+    name: 'Vue.js'
+  },
+  // define methods under the `methods` object
+  methods: {
+    greet: function (event) {
+      // `this` inside methods point to the Vue instance
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      alert(event.target.tagName)
+    }
+  }
+})
+
+new Vue({
+  el: '#example-2',
+  methods: {
+    say: function (msg) {
+      alert(msg)
+    }
+  }
+})
+
+// enable @keyup.f1
+Vue.directive('on').keyCodes.f1 = 112
+
+
+
+</script>
